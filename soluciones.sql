@@ -6,14 +6,9 @@
 
 -- ── CONSULTA 1: LEFT JOIN ─────────────────
 -- Pregunta de negocio: ¿Qué productos del catálogo nunca fueron vendidos?
-
-	SELECT P.producto_id, P.nombre, P.categoria
-	FROM productos AS P
-	LEFT JOIN ventas AS V
-	ON P.producto_id = V.producto_id
-	WHERE V.venta_id IS NULL;
-
 -- Mostrá todos los productos y sus ventas asociadas.
+-- Los productos sin ventas aparecerán con NULL en las columnas de ventas.
+
 	SELECT P.producto_id, P.nombre, P.categoria, V.fecha_venta, V.venta_id, V.cantidad, P.precio, Total = (P.precio * V.cantidad)
 	FROM productos AS P
 	LEFT JOIN ventas AS V
