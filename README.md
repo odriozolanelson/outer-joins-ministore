@@ -1,17 +1,51 @@
--- ══════════════════════════════════════════
--- MiniStore — Soluciones con Outer JOINs
--- Autor: Nelson Odriozola
--- Fecha: 13/07/2026
--- ══════════════════════════════════════════
+# MiniStore – Soluciones con OUTER JOIN
 
-¿Por qué usaste LEFT JOIN para la Consulta 1 y no INNER JOIN? ¿Qué se perdería si usaras INNER JOIN?
-Use LEFT JOIN porque yo queria poder visualizar aquellos productos que no tenian ninguna venta asociada. En caso de haber usado INNER JOIN los valores nulos no hubiesen venido, es decir me hubiese mostrado solo aquellos productos con ventas, y yo queria identificar los productos que no tenian ninguna venta.
+**Autor:** Nelson Odriozola  
+**Fecha:** 13/07/2026
 
-¿Por qué usaste RIGHT JOIN para la Consulta 2? ¿Qué tabla está a la izquierda y cuál a la derecha en tu consulta?
-En la consulta 2 use RIGHT JOIN porque yo queria identificar aquellas ventas registradas que no tenian asociado ningun producto en la tabla respectiva. Es decir una venta de un producto que no estaba identificado. La tabla izquierda es la de productos y la derecha de ventas.
+---
 
-¿Qué representan los valores NULL en cada resultado? Explicá con un ejemplo concreto de los datos qué significa que venta_id sea NULL en la Consulta 1 y que producto_id de productos sea NULL en la Consulta 2.
-Los valores NULL como resultado indican que no hay una coicidencia para ese registro entre ambas tablas. En la consulta 1 el NULL en el id_venta significa que dicho producto no se ha vendido hasta el momento. El NULL en producto_id en la Consutla 2 indica que esa venta no tiene ningun producto asociado, es decir se vendió un producto que no esta identificado.
+## ¿Por qué usaste `LEFT JOIN` para la Consulta 1 y no `INNER JOIN`?
 
-¿Cuándo usarías FULL OUTER JOIN en un caso real de negocio?
-El FULL OUTER JOIN lo usaria cuando quiero tener un panorama general de ambas tablas conjuntamente. Para identificar todos aquellos registros que no tengas un registro vinculado entre las dos tablas
+Utilicé `LEFT JOIN` porque quería visualizar también aquellos productos que no tenían ninguna venta asociada.
+
+Si hubiera utilizado `INNER JOIN`, esos productos no habrían aparecido en el resultado, ya que este tipo de unión solo devuelve los registros que tienen coincidencia en ambas tablas. Como objetivo de la consulta era identificar los productos sin ventas, `LEFT JOIN` era la opción adecuada.
+
+---
+
+## ¿Por qué usaste `RIGHT JOIN` para la Consulta 2?
+
+Utilicé `RIGHT JOIN` porque quería identificar las ventas registradas que no tenían asociado ningún producto en la tabla **Productos**.
+
+En la consulta:
+
+- La tabla de la izquierda es **Productos**.
+- La tabla de la derecha es **Ventas**.
+
+De esta manera, se muestran todas las ventas, incluso aquellas cuyo `producto_id` no existe en la tabla de productos.
+
+---
+
+## ¿Qué representan los valores `NULL` en cada resultado?
+
+Los valores `NULL` indican que no existe una coincidencia entre los registros de ambas tablas.
+
+### Consulta 1 (`LEFT JOIN`)
+
+Si `venta_id` es `NULL`, significa que ese producto nunca fue vendido.
+
+### Consulta 2 (`RIGHT JOIN`)
+
+Si `producto_id` de la tabla **Productos** es `NULL`, significa que existe una venta cuyo producto no está registrado en la tabla de productos.
+
+---
+
+## ¿Cuándo usarías `FULL OUTER JOIN` en un caso real de negocio?
+
+Utilizaría `FULL OUTER JOIN` cuando necesite obtener una visión completa de ambas tablas, mostrando:
+
+- los productos sin ventas;
+- las ventas sin un producto asociado;
+- y los registros que sí tienen coincidencia.
+
+Este tipo de consulta es útil para realizar controles de integridad de datos, detectar inconsistencias o validar la calidad de la información almacenada en la base de datos.
