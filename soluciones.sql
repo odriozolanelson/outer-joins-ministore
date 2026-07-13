@@ -21,7 +21,7 @@
 -- que no figuran en nuestro catálogo? (posible error de carga de datos)
 -- Los registros huérfanos aparecerán con NULL en las columnas de productos.
 
-	SELECT V.venta_id, P.producto_id, P.nombre, P.categoria
+	SELECT *
 	FROM productos AS P
 	RIGHT JOIN ventas AS V
 	ON P.producto_id = V.producto_id
