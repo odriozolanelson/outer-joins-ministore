@@ -9,7 +9,7 @@
 -- Mostrá todos los productos y sus ventas asociadas.
 -- Los productos sin ventas aparecerán con NULL en las columnas de ventas.
 
-	SELECT P.producto_id, P.nombre, P.categoria, V.fecha_venta, V.venta_id, V.cantidad, P.precio, Total = (P.precio * V.cantidad)
+	SELECT *
 	FROM productos AS P
 	LEFT JOIN ventas AS V
 	ON P.producto_id = V.producto_id
